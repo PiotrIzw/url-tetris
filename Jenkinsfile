@@ -40,7 +40,6 @@ pipeline {
                         }
                     }
                 }
-                sh 'npm stop'
                 sh 'yarn test > log.txt'
             }
             post {
