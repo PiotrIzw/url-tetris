@@ -49,9 +49,7 @@ pipeline {
                         body: "Something is wrong with ${env.BUILD_URL}"        
                 }
                 success {
-                    mail to: 'piotrekizworski@gmail.com',
-                        subject: "Success Pipeline:",
-                        body: "Success testing "                        
+                    sh 'echo success'
                 }
             }
         }
