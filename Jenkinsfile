@@ -25,6 +25,7 @@ pipeline {
                 }
                 success {
                     
+                }
             }
         }
         stage('Test') {
