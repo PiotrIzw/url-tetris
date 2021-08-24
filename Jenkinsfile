@@ -15,7 +15,6 @@ pipeline {
                     script {
                         env.FAILED = true
                     }  
-                    
                     emailext attachLog: true,
                         attachmentsPattern: 'log_build.txt',
                         to:'piotrekizworski@gmail.com',
