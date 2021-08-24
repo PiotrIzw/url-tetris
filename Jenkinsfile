@@ -32,16 +32,7 @@ pipeline {
         }
         stage('Test') {
              steps {
-                when ( env.FAILED ) {
-                    expression {
-                        currentBuild.result = 'ABORTED'
-                        error('Build failed! Stopping…')
-                    }
-                }
-                sh 'yarn test > log.txt'
-            }
-            post {
-                sh 'echo test'
+                 echo 'test'
             }
         }
         stage('Deploy') {
