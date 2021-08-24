@@ -32,8 +32,15 @@ pipeline {
         }
         stage('Test') {
              steps {
-                 echo 'test'
+                when ( env.FAILED ) {
+                    expression {
+                        currentBuild.result = 'ABORTED'
+                        error('Build failed! Stopping…')
+                    }
+                }
+                sh 'yarn test > log.txt'
             }
+            
         }
         stage('Deploy') {
             steps {
