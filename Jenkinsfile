@@ -29,13 +29,30 @@ pipeline {
                         body: "Success building ${env.BUILD_URL} "
                 }
             }
-            
-            
         }
         stage('Test') {
-            steps {
-                echo 'Testing..'
-                sh 'yarn test'
+             steps {
+                when ( env.FAILED ) {
+                    expression {
+                        currentBuild.result = 'ABORTED'
+                        error('Build failed! Stopping…')
+                    }
+                }
+                sh 'yarn test > log.txt'
+            }
+            post {
+                failure {
+                    emailext attachLog: true,
+                        attachmentsPattern: 'log.txt',
+                        to:'piotrekizworski@gmail.com',
+                        subject: "Failed Test stage in Pipeline: ${currentBuild.fullDisplayName}",
+                        body: "Something is wrong with ${env.BUILD_URL}"        
+                }
+                success {
+                    mail to: 'piotrekizworski@gmail.com',
+                        subject: "Success Pipeline: ${currentBuild.fullDisplayName}",
+                        body: "Success testing ${env.BUILD_URL} "                        
+                }
             }
         }
         stage('Deploy') {
