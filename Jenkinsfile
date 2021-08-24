@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Test') {
              steps {
-                when ( env.FAILED ) {
+                if ( env.FAILED ) {
                     expression {
                         currentBuild.result = 'ABORTED'
                         error('Build failed! Stopping…')
