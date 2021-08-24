@@ -24,7 +24,9 @@ pipeline {
                       
                 }
                 success {
-                    sh 'test'
+                    mail to: 'piotrekizworski@gmail.com',
+                        subject: "Success Pipeline: ${currentBuild.fullDisplayName}",
+                        body: "Success building ${env.BUILD_URL} "
                 }
             }
         }
