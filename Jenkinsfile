@@ -41,16 +41,7 @@ pipeline {
                 sh 'yarn test > log.txt'
             }
             post {
-                failure {
-                    emailext attachLog: true,
-                        attachmentsPattern: 'log.txt',
-                        to:'piotrekizworski@gmail.com',
-                        subject: "Failed Test stage in Pipeline: ${currentBuild.fullDisplayName}",
-                        body: "Something is wrong with ${env.BUILD_URL}"        
-                }
-                success {
-                    sh 'echo success'
-                }
+                sh 'echo test'
             }
         }
         stage('Deploy') {
