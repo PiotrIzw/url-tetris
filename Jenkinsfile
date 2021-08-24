@@ -50,8 +50,8 @@ pipeline {
                 }
                 success {
                     mail to: 'piotrekizworski@gmail.com',
-                        subject: "Success Pipeline: ${currentBuild.fullDisplayName}",
-                        body: "Success testing ${env.BUILD_URL} "                        
+                        subject: "Success Pipeline:",
+                        body: "Success testing "                        
                 }
             }
         }
