@@ -59,6 +59,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                sh 'docker build -t dockertetris -f Dockerfile-deploy .'
             }
         }
     }
