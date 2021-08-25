@@ -60,6 +60,22 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 sh 'docker build -t dockertetris -f Dockerfile-deploy .'
+                sh 'docker run dockertetris'
+                
+                post {
+                    failure {
+                         emailext attachLog: true,
+                            attachmentsPattern: 'log.txt',
+                            to:'piotrekizworski@gmail.com',
+                            subject: "Failed Deploy stage in Pipeline: ${currentBuild.fullDisplayName}",
+                            body: "Something is wrong with ${env.BUILD_URL}"        
+                    }
+                    success {
+                        mail to: 'piotrekizworski@gmail.com',
+                            subject: "Success Pipeline: ${currentBuild.fullDisplayName}",
+                            body: "Success deploying ${env.BUILD_URL} "                        
+                    }
+                }
             }
         }
     }
