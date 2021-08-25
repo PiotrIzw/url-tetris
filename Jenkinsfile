@@ -61,7 +61,7 @@ pipeline {
                 echo 'Deploying....'
                 sh 'docker build -t dockertetris -f Dockerfile-deploy .'
                 sh 'docker run dockertetris'
-                
+                }
                 post {
                     failure {
                          emailext attachLog: true,
@@ -76,7 +76,6 @@ pipeline {
                             body: "Success deploying ${env.BUILD_URL} "                        
                     }
                 }
-            }
         }
     }
 }
