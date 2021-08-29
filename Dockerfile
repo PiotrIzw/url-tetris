@@ -17,4 +17,4 @@ COPY . url-tetris/
 WORKDIR url-tetris
 RUN npm install
 RUN npm install --global yarn
-RUN yarn build
+RUN yarn start
