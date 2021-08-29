@@ -15,4 +15,5 @@ RUN cd ~
 
 COPY . url-tetris/
 WORKDIR url-tetris
-RUN ls
+RUN npm install
+RUN yarn build
